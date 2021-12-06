@@ -1,0 +1,264 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+      "resourcesTag": {
+          "type": "string",
+          "defaultValue": "Thales",
+          "metadata": {
+            "description": "Unique tag to identify all the resources associated to this deployment"
+          }
+      },
+      "logicAppName": {
+          "type": "string",
+          "defaultValue": "ImmutableIdSchedulerLogicApp",
+          "metadata": {
+            "description": "Logic App name which runs recurrence action to trigger the script."
+          }
+      },
+      "recurrenceInterval": {
+      "type": "int",
+      "defaultValue": 10,
+      "metadata": {
+          "description": "Recurrence interval after which script to patch ImmutableId should be executed."
+          }
+      },
+      "recurrenceFrequency": {
+      "type": "string",
+      "defaultValue": "Minute",
+      "allowedValues": [
+          "Second",
+          "Minute",
+          "Hour",
+          "Day",
+          "Week",
+          "Month",
+          "Year"
+          ]
+      },
+      "resourcesLocation": {
+          "type": "string",
+          "defaultValue": "[resourceGroup().location]",
+          "metadata": {
+          "description": "Specifies the Azure location where all resources will be created."
+          }
+      },
+      "automationAccountName": {
+          "type": "string",
+          "defaultValue": "ImmutableIdAutomationAccount",
+          "metadata": {
+          "description": "Name of Automation account which is authorized to patch ImmutableId to AzureAD users"
+          }
+      },
+      "powerShellRunbookName": {
+          "type": "string",
+          "defaultValue": "ImmutableIdPowerShellRunbook",
+          "metadata": {
+          "description": "Name of Powershell runbook script which patches the AzureAD users"
+          }
+      },
+      "runbookWebhookName": {
+          "type": "string",
+          "defaultValue": "ImmutableIdRunbookWebhook",
+          "metadata": {
+              "description": "Name of the Webhook to trigger the Runbook execution"
+          }
+      },
+      "artifactsLocation": {
+          "type": "string",
+          "defaultValue": "https://github.com/ThalesGroup/sta-azure-directory-sync/blob/development",
+          "metadata": {
+          "description": "URI location where Powershell scripts are stored"
+          }
+      },
+      "artifactsHash": {
+          "type": "string",
+          "defaultValue": "3D03DFD1A570660BC8BE15641FBA826C93990E7463AB9A7402BCA4E9CD704ED2",
+          "metadata": {
+          "description": "SHA256 hash of the Powershell scripts"
+          }
+      },
+      "artifactsVersion": {
+          "type": "string",
+          "defaultValue": "0.9",
+          "metadata": {
+          "description": "Version of the Powershell script to be deployed"
+          }
+      },
+      "currentSystemDate": {
+          "type": "string",
+          "defaultValue": "[utcNow('d')]",
+          "metadata": {
+              "description": "Current system date, for reference only, please donot change"
+          }
+      },
+      "webhookExpiryTime": {
+          "type": "string",
+          "defaultValue": "[dateTimeAdd(parameters('currentSystemDate'), 'P9Y')]",
+          "metadata": {
+              "description": "Date by which webhook will expire, defaultValue is 9 years and maximum allowed value is 9 years and 11 months"
+          }
+      }
+  },
+  "variables": {
+      "encodedWebhookSecret": "MjZlZWIxYjgtYzlmZi00ZjM2LWExOTgtMmIwNzI5YjZhMjUy",
+      "internalResourcesTag": "AzureADUsersImmutableId",
+      "scriptLocation": "[concat(parameters('artifactsLocation'), '/Scripts/', parameters('artifactsVersion'), '/')]"
+  },
+  "resources": [
+    {
+        "type": "Microsoft.Automation/automationAccounts",
+        "apiVersion": "2020-01-13-preview",
+        "name": "[parameters('automationAccountName')]",
+        "location": "[parameters('resourcesLocation')]",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "sku": {
+            "name": "Basic"
+          }
+        },
+        "resources": [
+          {
+            "type": "runbooks",
+            "apiVersion": "2020-01-13-preview",
+            "name": "[parameters('powerShellRunbookName')]",
+            "location": "[parameters('resourcesLocation')]",
+            "dependsOn": [
+                "[parameters('automationAccountName')]"
+              ],
+            "tags": {
+              "tagName1": "[variables('internalResourcesTag')]",
+              "tagName2": "[parameters('resourcesTag')]"
+            },
+            "properties": {
+              "description": "Powershell runbook to patch immutableId to AzureAD users",
+              "runbookType": "PowerShell",
+              "runtimeVersion": "5.1",
+              "logProgress": false,
+              "logVerbose": false,
+              "publishContentLink": {
+                "contentHash": {
+                    "algorithm": "sha256",
+                    "value": "[parameters('artifactsHash')]"
+                },
+                "uri": "[uri(variables('scriptLocation'),'Set-ImmutableIdForActiveDirectoryUsers.ps1')]",
+                "version": "[parameters('artifactsVersion')]"
+              }
+            }
+          },
+          {
+              "type": "modules",
+              "apiVersion": "2020-01-13-preview",
+              "name": "AzureAD",
+              "location": "[parameters('resourcesLocation')]",
+              "dependsOn": [
+                  "[parameters('automationAccountName')]"
+                ],
+              "tags": {
+                  "tagName1": "[variables('internalResourcesTag')]",
+                  "tagName2": "[parameters('resourcesTag')]"
+              },
+              "properties": {
+                "contentLink": {
+                  "uri": "https://powershellgallery.com/API/V2/package/AzureAD/2.0.2.140",
+                  "version": "2.0.2.140"
+                }
+              }
+          },
+          {
+              "type": "webhooks",
+              "apiVersion": "2018-06-30",
+              "name": "[parameters('runbookWebhookName')]",
+              "dependsOn": [
+                  "[parameters('automationAccountName')]",
+                  "[parameters('powerShellRunbookName')]"
+              ],
+              "tags": {
+                  "tagName1": "[variables('internalResourcesTag')]",
+                  "tagName2": "[parameters('resourcesTag')]"
+              },
+              "properties": {
+                  "isEnabled": true,
+                  "expiryTime": "[parameters('webhookExpiryTime')]",
+                  "runbook": {
+                      "name": "[parameters('powerShellRunbookName')]"
+                  }
+              }
+          }
+        ]
+      },
+      {
+          "type": "Microsoft.Logic/workflows",
+          "apiVersion": "2016-06-01",
+          "name": "[parameters('logicAppName')]",
+          "location": "[parameters('resourcesLocation')]",
+          "dependsOn": [  
+              "[parameters('runbookWebhookName')]"
+          ],
+          "tags": {
+              "tagName1": "[variables('internalResourcesTag')]",
+              "tagName2": "[parameters('resourcesTag')]"
+          },
+          "properties": {
+            "definition": {
+              "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+              "contentVersion": "1.0.0.0",
+              "parameters": {},
+              "triggers": {
+                "Recurrence": {
+                  "recurrence": {
+                    "frequency": "[parameters('recurrenceFrequency')]",
+                    "interval": "[parameters('recurrenceInterval')]"
+                  },
+                  "type": "Recurrence",
+                  "runtimeConfiguration": {
+                    "concurrency": {
+                      "runs": 1
+                    }
+                  }
+                }
+              },
+              "actions": {
+                "HTTP_Webhook": {
+                  "runAfter": {
+                    "InitializeWebhookSecret": [
+                      "Succeeded"
+                    ]
+                  },
+                  "type": "HttpWebhook",
+                  "inputs": {
+                    "subscribe": {
+                      "body": {
+                        "CallBackUrl": "@listCallbackUrl()",
+                        "Id": "SetImmutableIdForAzureADUsers",
+                        "Secret": "[variables('encodedWebhookSecret')]"
+                      },
+                      "method": "POST",
+                      "uri": "[reference(parameters('runbookWebhookName')).uri]"
+                    },
+                    "unsubscribe": {}
+                  }
+                },
+                "InitializeWebhookSecret": {
+                  "runAfter": {},
+                  "type": "InitializeVariable",
+                  "inputs": {
+                    "variables": [
+                      {
+                        "name": "WebhookSecret",
+                        "type": "string",
+                        "value": "[variables('encodedWebhookSecret')]"
+                      }
+                    ]
+                  }
+                }
+              },
+              "outputs": {}
+            },
+            "parameters": {}
+          }
+      }
+  ]
+}
