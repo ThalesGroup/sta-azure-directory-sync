@@ -66,7 +66,7 @@
       },
       "artifactsLocation": {
           "type": "string",
-          "defaultValue": "https://github.com/ThalesGroup/sta-azure-directory-sync/blob/development",
+          "defaultValue": "https://raw.githubusercontent.com/ThalesGroup/sta-azure-directory-sync/development",
           "metadata": {
           "description": "URI location where Powershell scripts are stored"
           }
@@ -103,7 +103,9 @@
   "variables": {
       "encodedWebhookSecret": "MjZlZWIxYjgtYzlmZi00ZjM2LWExOTgtMmIwNzI5YjZhMjUy",
       "internalResourcesTag": "AzureADUsersImmutableId",
-      "scriptLocation": "[concat(parameters('artifactsLocation'), '/Scripts/', parameters('artifactsVersion'), '/')]"
+      "scriptInternalDirectory" : "/Resources/Scripts/",
+      "directorySplit": "/",
+      "scriptLocation": "[concat(parameters('artifactsLocation'), variables('scriptInternalDirectory'), parameters('artifactsVersion'), variables('directorySplit'))]"
   },
   "resources": [
     {
