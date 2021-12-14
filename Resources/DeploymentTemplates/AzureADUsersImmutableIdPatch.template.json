@@ -2,18 +2,10 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-      "resourcesTag": {
+      "webhookAuthenticationSecret": {
           "type": "string",
-          "defaultValue": "Thales",
           "metadata": {
-            "description": "Unique tag to identify all the resources associated to this deployment"
-          }
-      },
-      "logicAppName": {
-          "type": "string",
-          "defaultValue": "ImmutableIdSchedulerLogicApp",
-          "metadata": {
-            "description": "Logic App name which runs recurrence action to trigger the script."
+            "description": "Unique value to authenticate the webhook request"
           }
       },
       "recurrenceInterval": {
@@ -32,8 +24,7 @@
           "Hour",
           "Day",
           "Week",
-          "Month",
-          "Year"
+          "Month"
           ]
       },
       "resourcesLocation": {
@@ -43,69 +34,46 @@
           "description": "Specifies the Azure location where all resources will be created."
           }
       },
+      "logicAppName": {
+          "type": "string",
+          "defaultValue": "AzureADImmutableIdSchedulerLogicApp",
+          "metadata": {
+            "description": "Logic App name which runs recurrence action to trigger the script."
+          }
+      },
       "automationAccountName": {
           "type": "string",
-          "defaultValue": "ImmutableIdAutomationAccount",
+          "defaultValue": "AzureADImmutableIdAutomationAccount",
           "metadata": {
           "description": "Name of Automation account which is authorized to patch ImmutableId to AzureAD users"
           }
       },
-      "powerShellRunbookName": {
+      "resourcesTag": {
           "type": "string",
-          "defaultValue": "ImmutableIdPowerShellRunbook",
+          "defaultValue": "Thales",
           "metadata": {
-          "description": "Name of Powershell runbook script which patches the AzureAD users"
-          }
-      },
-      "runbookWebhookName": {
-          "type": "string",
-          "defaultValue": "ImmutableIdRunbookWebhook",
-          "metadata": {
-              "description": "Name of the Webhook to trigger the Runbook execution"
-          }
-      },
-      "artifactsLocation": {
-          "type": "string",
-          "defaultValue": "https://raw.githubusercontent.com/ThalesGroup/sta-azure-directory-sync/development",
-          "metadata": {
-          "description": "URI location where Powershell scripts are stored"
-          }
-      },
-      "artifactsHash": {
-          "type": "string",
-          "defaultValue": "3D03DFD1A570660BC8BE15641FBA826C93990E7463AB9A7402BCA4E9CD704ED2",
-          "metadata": {
-          "description": "SHA256 hash of the Powershell scripts"
-          }
-      },
-      "artifactsVersion": {
-          "type": "string",
-          "defaultValue": "0.9",
-          "metadata": {
-          "description": "Version of the Powershell script to be deployed"
+            "description": "Unique tag to identify all the Azure resources associated to this deployment"
           }
       },
       "currentSystemDate": {
           "type": "string",
           "defaultValue": "[utcNow('d')]",
           "metadata": {
-              "description": "Current system date, for reference only, please donot change"
-          }
-      },
-      "webhookExpiryTime": {
-          "type": "string",
-          "defaultValue": "[dateTimeAdd(parameters('currentSystemDate'), 'P9Y')]",
-          "metadata": {
-              "description": "Date by which webhook will expire, defaultValue is 9 years and maximum allowed value is 9 years and 11 months"
+              "description": "Current system date, for reference only, please do not change"
           }
       }
   },
   "variables": {
-      "encodedWebhookSecret": "MjZlZWIxYjgtYzlmZi00ZjM2LWExOTgtMmIwNzI5YjZhMjUy",
+      "scriptFileLocation": "https://raw.githubusercontent.com/ThalesGroup/sta-azure-directory-sync/development",
+      "scriptFileHash" : "F9AF5F580122920C5CBF08819A525DD1D5AD80CFBB78B45D960A6F03AB36F4F1",
+      "scriptFileVersion" : "0.9",
+      "webhookRequestId": "SetImmutableIdForAzureADUsers",
       "internalResourcesTag": "AzureADUsersImmutableId",
       "scriptInternalDirectory" : "/Resources/Scripts/",
-      "directorySplit": "/",
-      "scriptLocation": "[concat(parameters('artifactsLocation'), variables('scriptInternalDirectory'), parameters('artifactsVersion'), variables('directorySplit'))]"
+      "scriptLocation": "[concat(variables('scriptFileLocation'), variables('scriptInternalDirectory'), variables('scriptFileVersion'), '/')]",
+      "webhookExpiryTime": "[dateTimeAdd(parameters('currentSystemDate'), 'P9Y')]",
+      "powerShellRunbookName": "AzureADImmutableIdPSRunbook",
+      "runbookWebhookName": "ImmutableIdRunbookTriggerWebhook"
   },
   "resources": [
     {
@@ -125,7 +93,7 @@
           {
             "type": "runbooks",
             "apiVersion": "2020-01-13-preview",
-            "name": "[parameters('powerShellRunbookName')]",
+            "name": "[variables('powerShellRunbookName')]",
             "location": "[parameters('resourcesLocation')]",
             "dependsOn": [
                 "[parameters('automationAccountName')]"
@@ -143,39 +111,77 @@
               "publishContentLink": {
                 "contentHash": {
                     "algorithm": "sha256",
-                    "value": "[parameters('artifactsHash')]"
+                    "value": "[variables('scriptFileHash')]"
                 },
                 "uri": "[uri(variables('scriptLocation'),'Set-ImmutableIdForActiveDirectoryUsers.ps1')]",
-                "version": "[parameters('artifactsVersion')]"
+                "version": "[variables('scriptFileVersion')]"
               }
+            }
+          },
+          {
+            "type": "variables",
+            "apiVersion": "2015-10-31",
+            "dependsOn": [
+              "[parameters('automationAccountName')]"
+            ],
+            "name": "WebhookId",
+            "properties": {
+              "description": "Webhook Id for writing ImmutableId",
+              "isEncrypted": false,
+              "value": "[concat('''',variables('webhookRequestId'), '''')]"
+            }
+          },
+          {
+            "type": "variables",
+            "apiVersion": "2015-10-31",
+            "dependsOn": [
+              "[parameters('automationAccountName')]"
+            ],
+            "name": "WebhookSecret",
+            "properties": {
+              "description": "Webhook secret to authenticate request to write ImmutableId",
+              "isEncrypted": false,
+              "value": "[concat('''',parameters('webhookAuthenticationSecret'), '''')]"
             }
           },
           {
               "type": "modules",
               "apiVersion": "2020-01-13-preview",
-              "name": "AzureAD",
+              "name": "Microsoft.Graph.Authentication",
               "location": "[parameters('resourcesLocation')]",
               "dependsOn": [
                   "[parameters('automationAccountName')]"
                 ],
-              "tags": {
-                  "tagName1": "[variables('internalResourcesTag')]",
-                  "tagName2": "[parameters('resourcesTag')]"
-              },
               "properties": {
                 "contentLink": {
-                  "uri": "https://powershellgallery.com/API/V2/package/AzureAD/2.0.2.140",
-                  "version": "2.0.2.140"
+                  "uri": "https://powershellgallery.com/API/V2/package/Microsoft.Graph.Authentication/1.9.0",
+                  "version": "1.9.0"
+                }
+              }
+          },
+          {
+              "type": "modules",
+              "apiVersion": "2020-01-13-preview",
+              "name": "Microsoft.Graph.Users",
+              "location": "[parameters('resourcesLocation')]",
+              "dependsOn": [
+                  "[parameters('automationAccountName')]",
+                  "Microsoft.Graph.Authentication"
+                ],
+              "properties": {
+                "contentLink": {
+                  "uri": "https://powershellgallery.com/API/V2/package/Microsoft.Graph.Users/1.9.0",
+                  "version": "1.9.0"
                 }
               }
           },
           {
               "type": "webhooks",
               "apiVersion": "2018-06-30",
-              "name": "[parameters('runbookWebhookName')]",
+              "name": "[variables('runbookWebhookName')]",
               "dependsOn": [
                   "[parameters('automationAccountName')]",
-                  "[parameters('powerShellRunbookName')]"
+                  "[variables('powerShellRunbookName')]"
               ],
               "tags": {
                   "tagName1": "[variables('internalResourcesTag')]",
@@ -183,9 +189,9 @@
               },
               "properties": {
                   "isEnabled": true,
-                  "expiryTime": "[parameters('webhookExpiryTime')]",
+                  "expiryTime": "[variables('webhookExpiryTime')]",
                   "runbook": {
-                      "name": "[parameters('powerShellRunbookName')]"
+                      "name": "[variables('powerShellRunbookName')]"
                   }
               }
           }
@@ -197,7 +203,7 @@
           "name": "[parameters('logicAppName')]",
           "location": "[parameters('resourcesLocation')]",
           "dependsOn": [  
-              "[parameters('runbookWebhookName')]"
+              "[variables('runbookWebhookName')]"
           ],
           "tags": {
               "tagName1": "[variables('internalResourcesTag')]",
@@ -235,10 +241,10 @@
                       "body": {
                         "CallBackUrl": "@listCallbackUrl()",
                         "Id": "SetImmutableIdForAzureADUsers",
-                        "Secret": "[variables('encodedWebhookSecret')]"
+                        "Secret": "@variables('WebhookSecret')"
                       },
                       "method": "POST",
-                      "uri": "[reference(parameters('runbookWebhookName')).uri]"
+                      "uri": "[reference(variables('runbookWebhookName')).uri]"
                     },
                     "unsubscribe": {}
                   }
@@ -251,7 +257,7 @@
                       {
                         "name": "WebhookSecret",
                         "type": "string",
-                        "value": "[variables('encodedWebhookSecret')]"
+                        "value": "[parameters('webhookAuthenticationSecret')]"
                       }
                     ]
                   }

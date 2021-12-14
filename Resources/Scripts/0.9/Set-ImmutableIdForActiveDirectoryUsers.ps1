@@ -45,12 +45,11 @@ function Set-ImmutableIdForActiveDirectoryUsers {
 
     Connect-AzureActiveDirectory
 
-    $usersBatchSize = 5 #35000 for testing only
+    $usersBatchSize = 3 #35000 for testing only
     $userIdsWithMissingImmutableId = Read-UsersBatchWithMissingImmutableId $usersBatchSize
 
     if ($userIdsWithMissingImmutableId) {
         Write-Output "Updating Immutable Id for $($userIdsWithMissingImmutableId.count) AzureAD users"
-        
         Set-UserImmutableId $userIdsWithMissingImmutableId
     }
     else {
@@ -62,13 +61,11 @@ function Set-ImmutableIdForActiveDirectoryUsers {
 
 function Connect-AzureActiveDirectory {
     Try {
-        $requiredAzureModule = "AzureAD"
+        $requiredAzureModule = "Microsoft.Graph.Users"
         if (-not (Get-Module -ListAvailable -Name $requiredAzureModule)) {
             Write-Error "Missing required Azure module '$requiredAzureModule'"
             Stop-ScriptExecution
         }
-
-        Import-Module AzureAD
 
         # default connection name
         $connectionName = "AzureRunAsConnection"
@@ -76,9 +73,9 @@ function Connect-AzureActiveDirectory {
         $servicePrincipalConnection = Get-AutomationConnection –Name $connectionName  
 
         write-output "Logging in to Azure AD"
-        Connect-AzureAD –TenantId $servicePrincipalConnection.TenantId `
-            –ApplicationId $servicePrincipalConnection.ApplicationId `
-            –CertificateThumbprint $servicePrincipalConnection.CertificateThumbprint
+        Connect-MgGraph -ClientID $servicePrincipalConnection.ApplicationId `
+                -TenantId $servicePrincipalConnection.TenantId `
+                -CertificateThumbprint $servicePrincipalConnection.CertificateThumbprint
     }
     Catch {
         Write-Error "Failed to establish connection with Azure AD"
@@ -89,26 +86,21 @@ function Connect-AzureActiveDirectory {
 }
 
 function Read-UsersBatchWithMissingImmutableId($acceptedBatchSize) {
-    $usersWithMissingImmutableId = $null
+    $usersWithMissingImmutableId = @()
     $acceptedUpnChars = 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w',
         'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '-', '_', '!', '#', '^', '~', ''''''
 
     for ($i=0; $i -lt $($acceptedUpnChars.count); $i++) {
         $searchElementChar = $acceptedUpnChars[$i]
-        $usersBatchFromAD = @(Get-AzureADUser -Filter "startswith(userPrincipalName, '$searchElementChar')" | Where-Object {$null -eq $_.ImmutableId} | Select-Object ObjectId)
-
+        $usersBatchFromAD = @(Get-MgUser -Property "Id,OnPremisesImmutableId" -Filter "startswith(userPrincipalName, '$searchElementChar')" | Where-Object {$null -eq $_.OnPremisesImmutableId} | Select-Object -ExpandProperty Id)
+        
         if($usersBatchFromAD) {
-            Write-Debug "$($usersBatchFromAD.count) users found with missing ImmutableId where UPN starts with '$searchElementChar'"
+            Write-Debug "$($usersBatchFromAD.count) users found with missing ImmutableId and when UPN starts with '$searchElementChar'"
             
-            if (-not($usersWithMissingImmutableId)) {
-                $usersWithMissingImmutableId = $usersBatchFromAD
-            }
-            else {
-                $usersWithMissingImmutableId = $usersWithMissingImmutableId + $usersBatchFromAD            
-            }
+            $usersWithMissingImmutableId = $usersWithMissingImmutableId + $usersBatchFromAD            
 
-            if ($usersWithMissingImmutableId.count -ge $acceptedBatchSize) {
-                Write-Output "Updating $($usersWithMissingImmutableId.count) users with missing ImmutableId, remaining users will be processed in the next iteration(s)"
+            if (($usersWithMissingImmutableId) -and ($usersWithMissingImmutableId.count -ge $acceptedBatchSize)) {
+                Write-Warning "Updating $($usersWithMissingImmutableId.count) users with missing ImmutableId, remaining users will be processed in the next iteration(s)"
                 break
             }
         }
@@ -124,26 +116,28 @@ function Read-UsersBatchWithMissingImmutableId($acceptedBatchSize) {
 
 function Set-UserImmutableId($userIdsWithMissingImmutableId) {
     if ($userIdsWithMissingImmutableId) {
-        foreach ($user in $userIdsWithMissingImmutableId)
+        foreach ($userId in $userIdsWithMissingImmutableId)
         {
-            Try {
-                $bytes=[System.Text.Encoding]::ASCII.GetBytes($user.ObjectId)
-                $immutableId =[Convert]::ToBase64String($bytes)
-                Set-AzureADUser -ObjectId $user.ObjectId -ImmutableId $immutableId
-                
-                Compare-UserImmutableIdWithAD $user.ObjectId $immutableId
-            }
-            Catch {
-                Write-Error "Exception occured while setting ImmutableId for Azure User $($user.ObjectId)"
-                
-                $ImmutableIdConflictMessage = "Same value for property immutableId already exists"
-                if ($_.Exception.Message | Select-String -Pattern $ImmutableIdConflictMessage -SimpleMatch) {
-                    Write-Warning "$ImmutableIdConflictMessage, trying to set different value"
-
-                    Set-UserImmutableIdEnrichedValue $user
+            if ($userId) {
+                Try {
+                    $bytes = [System.Text.Encoding]::ASCII.GetBytes($userId)
+                    $immutableId = [Convert]::ToBase64String($bytes)
+                    Update-MgUser -UserId $userId -OnPremisesImmutableId $immutableId
+                    
+                    Compare-UserImmutableIdWithAD $user.Id $immutableId
                 }
-                else {
-                    Write-Error $_.Exception.Message
+                Catch {
+                    Write-Error "Exception occured while setting ImmutableId for Azure user: $($userId)"
+                    
+                    $ImmutableIdConflictMessage = "Same value for property immutableId already exists"
+                    if ($_.Exception.Message | Select-String -Pattern $ImmutableIdConflictMessage -SimpleMatch) {
+                        Write-Warning "$ImmutableIdConflictMessage, trying to set different value"
+    
+                        Set-UserImmutableIdEnrichedValue $userId
+                    }
+                    else {
+                        Write-Error $_.Exception.Message
+                    }
                 }
             }
         }     
@@ -156,9 +150,9 @@ function Set-UserImmutableId($userIdsWithMissingImmutableId) {
 }
 
 function Compare-UserImmutableIdWithAD($userObjectId, $userImmutableId) {
-    $userToValidate = Get-AzureADUser -ObjectId $userObjectId
+    $userToValidate = Get-MgUser -UserId $userObjectId
 
-    if ($userToValidate.ImmutableId.equals($userImmutableId)) {
+    if ($userToValidate.OnPremisesImmutableId.equals($userImmutableId)) {
         Write-Verbose "Successfully assigned ImmutableId to user $userObjectId"
     }
     else {
@@ -168,61 +162,52 @@ function Compare-UserImmutableIdWithAD($userObjectId, $userImmutableId) {
 
 function Set-UserImmutableIdEnrichedValue($userObjectId) {
     Try {
-        $enrichedObjectId = $userObjectId.ObjectId + (Get-Random -Minimum 1 -Maximum 9)
+        $enrichedObjectId = $userObjectId + (Get-Random -Minimum 1 -Maximum 9)
         $bytes=[System.Text.Encoding]::ASCII.GetBytes($enrichedObjectId)
         $ImmutableId =[Convert]::ToBase64String($bytes)
 
-        Set-AzureADUser -ObjectId $userObjectId.ObjectId -ImmutableId $ImmutableId
+        Update-MgUser -UserId $userObjectId -OnPremisesImmutableId $ImmutableId
                 
-        Compare-UserImmutableIdWithAD $userObjectId.ObjectId $ImmutableId
+        Compare-UserImmutableIdWithAD $userObjectId $ImmutableId
     }
     Catch {
-        Write-Error "Exception occured while setting enriched ImmutableId for Azure User $($userObjectId.ObjectId)"
+        Write-Error "Exception occured while setting enriched ImmutableId for Azure User $($userObjectId)"
         Write-Error $_.Exception.Message
     }
 }
 
-function Grant-AccessToWebhookRequest($webhookRequestData, $internalWebhookSecret) {
+function Grant-AccessToWebhookRequest($webhookRequestData) {
     if($webhookRequestData.RequestBody) {
         Write-Verbose "Webhook request received with body: $($webhookRequestData.RequestBody)"
         
         try {
             $webhookBodyObject = ConvertFrom-JSON -InputObject $webhookRequestData.RequestBody
+
+            if (-not($webhookBodyObject.CallBackUrl)) {
+                Write-Error "Webhook request received with missing information"
+                Exit
+            }
+    
+            $global:globalCallBackUrl = $webhookBodyObject.CallBackUrl
+    
+            $expectedWebhookId = Get-AutomationVariable -Name 'WebhookId'
+            $expectedWebhookSecret = Get-AutomationVariable -Name 'WebhookSecret'
+    
+            if (-not($webhookBodyObject.Id -eq $expectedWebhookId -and $webhookBodyObject.Secret -eq $expectedWebhookSecret)) {
+                Write-Error "Webhook request unauthorized"
+                Stop-ScriptExecution
+            }
+    
+            Write-Verbose "Webhook request data validated and authenticated"
         }
         catch {
             Write-Error "Failed to parse Webhook RequestBody information"
             Write-Error $_.Exception.Message
             Exit
         }
-
-        $webhookRequestId = $webhookBodyObject.Id
-        $webhookRequestSecret = $webhookBodyObject.Secret
-        $webhookRequestCallBackUrl = $webhookBodyObject.CallBackUrl
-        
-        if (-not($webhookRequestId -and $webhookRequestSecret -and $webhookRequestCallBackUrl)) {
-            Write-Error "Webhook request received with missing information"
-            Exit
-        }
-
-        $webhookRequestUniqueId = "SetImmutableIdForAzureADUsers"
-        $global:globalCallBackUrl = $webhookRequestCallBackUrl
-     
-        if (-not($internalWebhookSecret)) {
-            Write-Error "Missing internally saved secret value for Webhook request"
-            Stop-ScriptExecution
-        }
-
-        $decodedSecret = [System.Text.Encoding]::ASCII.GetString([System.Convert]::FromBase64String($webhookRequestSecret))
-
-        if (-not($webhookRequestId -eq $webhookRequestUniqueId -and $decodedSecret -eq $internalWebhookSecret)) {
-            Write-Error "Webhook request unauthorized"
-            Stop-ScriptExecution
-        }
-
-        Write-Verbose "Webhook request data validated and authenticated"
     }
     else {
-        Write-Error "Webhook request received with invalid RequestBody"
+        Write-Error "Webhook request received with empty RequestBody"
         Exit
     }
 }
@@ -230,24 +215,23 @@ function Grant-AccessToWebhookRequest($webhookRequestData, $internalWebhookSecre
 function Stop-ScriptExecution() {
     if ($globalCallBackUrl) {
         Invoke-RestMethod -Method post -Uri $globalCallBackUrl
-        write-output "Posted Webhook request to unsubscribe"
+        Write-Debug "Webhook unsubscribed"
     }
     else {
         Write-Warning "Missing call back URL for the webhook"
     }
     
+    Disconnect-MgGraph
     Write-Verbose "Completed script execution to set immutableId at $(Get-Date)"
     Exit
 }
 
 #entry point
-$webhookRequestSecret = "26eeb1b8-c9ff-4f36-a198-2b0729b6a252"
-
 if(-not ($webhookData)) {
     Write-Error "Webhook request received with missing RequestBody"
     Exit
 }
 
-Grant-AccessToWebhookRequest $webhookData $webhookRequestSecret
+Grant-AccessToWebhookRequest $webhookData
 
 Set-ImmutableIdForActiveDirectoryUsers
