@@ -64,9 +64,9 @@
       }
   },
   "variables": {
-      "scriptFileLocation": "https://raw.githubusercontent.com/ThalesGroup/sta-azure-directory-sync/development",
-      "scriptFileHash" : "F9AF5F580122920C5CBF08819A525DD1D5AD80CFBB78B45D960A6F03AB36F4F1",
-      "scriptFileVersion" : "0.9",
+      "scriptFileLocation": "https://raw.githubusercontent.com/ThalesGroup/sta-azure-directory-sync/master",
+      "scriptFileHash" : "4D81786D9F676BDBEBAF67402ACB61563D4BA56A2F01F86E7ADA31D3C86AF6CB",
+      "scriptFileVersion" : "1.0",
       "webhookRequestId": "SetImmutableIdForAzureADUsers",
       "internalResourcesTag": "AzureADUsersImmutableId",
       "scriptInternalDirectory" : "/Resources/Scripts/",
