@@ -11,5 +11,5 @@ If you are interested in contributing to the STA Azure Directory Synch project, 
 
 ## License
 
-The chosen license in accordance with legal department must be defined into an explicit [LICENSE](https://github.com/ThalesGroup/template-project/blob/master/LICENSE) file at the root of the repository
+The chosen license in accordance with legal department must be defined into an explicit [LICENSE](https://github.com/ThalesGroup/sta-azure-directory-sync/blob/master/LICENSE) file at the root of the repository
 You can also link this file in this README section.
