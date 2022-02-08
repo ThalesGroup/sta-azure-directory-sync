@@ -65,8 +65,8 @@
   },
   "variables": {
       "scriptFileLocation": "https://raw.githubusercontent.com/ThalesGroup/sta-azure-directory-sync/master",
-      "scriptFileHash" : "4D81786D9F676BDBEBAF67402ACB61563D4BA56A2F01F86E7ADA31D3C86AF6CB",
-      "scriptFileVersion" : "1.0",
+      "scriptFileHash" : "D9A709869C4EBBD5645931C66BA6F2658592DA8EDAF092C210F388A15EC930F6",
+      "scriptFileVersion" : "1.1",
       "webhookRequestId": "SetImmutableIdForAzureADUsers",
       "internalResourcesTag": "AzureADUsersImmutableId",
       "scriptInternalDirectory" : "/Resources/Scripts/",
