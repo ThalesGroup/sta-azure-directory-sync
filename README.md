@@ -1,4 +1,4 @@
-# SAFENET Trusted Acces - Azure Directory Synch
+# SafeNet Trusted Access - Azure Directory Synchronization
 
 ## Get started
 
