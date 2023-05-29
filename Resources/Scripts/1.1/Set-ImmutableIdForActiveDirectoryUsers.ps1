@@ -79,21 +79,7 @@ function Set-ImmutableIdForActiveDirectoryUsers {
 
 function Connect-AzureActiveDirectory {
     Try {
-        $requiredAzureModule = "Microsoft.Graph.Users"
-        if (-not (Get-Module -ListAvailable -Name $requiredAzureModule)) {
-            Write-Error "Missing required Azure module '$requiredAzureModule'"
-            Stop-ScriptExecution
-        }
-
-        # default connection name
-        $connectionName = "AzureRunAsConnection"
-
-        $servicePrincipalConnection = Get-AutomationConnection –Name $connectionName  
-
-        write-output "Logging in to Azure AD"
-        Connect-MgGraph -ClientID $servicePrincipalConnection.ApplicationId `
-                -TenantId $servicePrincipalConnection.TenantId `
-                -CertificateThumbprint $servicePrincipalConnection.CertificateThumbprint
+        Connect-MgGraph -Identity
     }
     Catch {
         Write-Error "Failed to establish connection with Azure AD"
