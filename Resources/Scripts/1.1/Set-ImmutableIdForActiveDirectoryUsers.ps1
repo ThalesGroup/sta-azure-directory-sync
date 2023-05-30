@@ -79,7 +79,9 @@ function Set-ImmutableIdForActiveDirectoryUsers {
 
 function Connect-AzureActiveDirectory {
     Try {
-        Connect-MgGraph -Identity
+        Connect-AzAccount -Identity
+        $token = Get-AzAccessToken -ResourceUrl "https://graph.microsoft.com"
+        Connect-MgGraph -AccessToken $token.Token
     }
     Catch {
         Write-Error "Failed to establish connection with Azure AD"
