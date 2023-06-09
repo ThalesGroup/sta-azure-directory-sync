@@ -64,7 +64,7 @@
       }
   },
   "variables": {
-      "scriptFileLocation": "https://raw.githubusercontent.com/ThalesGroup/sta-azure-directory-sync/SAS-63102",
+      "scriptFileLocation": "https://raw.githubusercontent.com/ThalesGroup/sta-azure-directory-sync/master",
       "scriptFileHash" : "D9A709869C4EBBD5645931C66BA6F2658592DA8EDAF092C210F388A15EC930F6",
       "scriptFileVersion" : "1.2",
       "webhookRequestId": "SetImmutableIdForAzureADUsers",
