@@ -72,8 +72,8 @@
       "scriptInternalDirectory" : "/Resources/Scripts/",
       "scriptLocation": "[concat(variables('scriptFileLocation'), variables('scriptInternalDirectory'), variables('scriptFileVersion'), '/')]",
       "webhookExpiryTime": "[dateTimeAdd(parameters('currentSystemDate'), 'P9Y')]",
-      "powerShellRunbookName": "AzureADImmutableIdPSRunbook",
-      "runbookWebhookName": "ImmutableIdRunbookTriggerWebhook"
+      "powerShellRunbookName": "AzureADImmutableIdPSRunbookWithIdentity",
+      "runbookWebhookName": "ImmutableIdRunbookTriggerWebhookWithIdentity"
   },
   "resources": [
     {
