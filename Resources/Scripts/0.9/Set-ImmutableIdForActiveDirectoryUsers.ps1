@@ -120,7 +120,7 @@ function Set-UserImmutableId($userIdsWithMissingImmutableId) {
         {
             if ($userId) {
                 Try {
-                    $bytes = [guid]::New($userId).ToByteArray()
+                    $bytes = [System.Text.Encoding]::ASCII.GetBytes($userId)
                     $immutableId = [Convert]::ToBase64String($bytes)
                     Update-MgUser -UserId $userId -OnPremisesImmutableId $immutableId
                     
