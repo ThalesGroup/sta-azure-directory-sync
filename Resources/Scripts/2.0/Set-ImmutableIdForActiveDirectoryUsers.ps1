@@ -128,7 +128,7 @@ function Set-UserImmutableId($userIdsWithMissingImmutableId) {
         {
             if ($userId) {
                 Try {
-                    $bytes = [guid]::New($userId).ToByteArray()
+                    $bytes = [System.Text.Encoding]::ASCII.GetBytes($userId)
                     $immutableId = [Convert]::ToBase64String($bytes)
 
                     $updateUserAction = Update-MgUser -PassThru -UserId $userId -OnPremisesImmutableId $immutableId
@@ -161,7 +161,7 @@ function Set-UserImmutableId($userIdsWithMissingImmutableId) {
 function Set-UserImmutableIdEnrichedValue($userObjectId) {
     Try {
         $enrichedObjectId = $userObjectId + (Get-Random -Minimum 1 -Maximum 9)
-	$bytes = [guid]::New($enrichedObjectId).ToByteArray()
+	    $bytes=[System.Text.Encoding]::ASCII.GetBytes($enrichedObjectId)
         $ImmutableId =[Convert]::ToBase64String($bytes)
 
         $updateUserAction = Update-MgUser -PassThru  -UserId $userObjectId -OnPremisesImmutable
