@@ -204,7 +204,7 @@
               "exportMissingReferences": false,
               "flowBehavior": "FlowWhenChanged",
               "flowType": "Always",
-              "matchingPriority": 1,
+              "matchingPriority": 2,
               "targetAttributeName": "userName",
               "source": {
                 "expression": "[userPrincipalName]",
@@ -330,7 +330,7 @@
               "exportMissingReferences": false,
               "flowBehavior": "FlowWhenChanged",
               "flowType": "Always",
-              "matchingPriority": 0,
+              "matchingPriority": 1,
               "targetAttributeName": "externalId",
               "source": {
                 "expression": "[objectId]",
