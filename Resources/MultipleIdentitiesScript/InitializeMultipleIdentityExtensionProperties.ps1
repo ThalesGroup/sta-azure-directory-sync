@@ -39,12 +39,14 @@ function Connect-AzureActiveDirectory {
         $file = ".\settings.json"
         if ($configFile) {
             $file = $configFile
+			write-host "Loading config from" $configFile "..."
         }
         
         # Load config file
         if (Test-Path -Path $file -PathType Leaf) {
-            $settings = Get-Content './settings.json' -ErrorAction Stop | Out-String | ConvertFrom-Json
-            $script:ApplicationId = $settings.applicationId
+            $settings = Get-Content $file -ErrorAction Stop | Out-String | ConvertFrom-Json
+            $script:AppRegistrationObjectId = $settings.appRegistrationObjectId
+			write-host "App Registration Object Id: " $script:AppRegistrationObjectId
         }
         else {
             Write-Host "The config file '$file' was not found."
@@ -118,8 +120,8 @@ function Add-ExtensionProperty {
       )
       process {
         write-host "Creating " $extensionName "..."
-        #reate an extension variable
-        return New-AzureADApplicationExtensionProperty -ObjectId $script:ApplicationId -Name $extensionName -DataType "String" -TargetObjects "User"
+        #create an extension variable
+        return New-AzureADApplicationExtensionProperty -ObjectId $script:AppRegistrationObjectId -Name $extensionName -DataType "String" -TargetObjects "User"
       }
 }
 
