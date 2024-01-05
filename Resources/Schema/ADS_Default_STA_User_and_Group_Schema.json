@@ -1,10 +1,12 @@
 {
-  "@odata.context": "https://graph.microsoft.com/beta/$metadata#servicePrincipals('99226b1a-ebaa-4541-ada8-34e4c7219110')/synchronization/jobs('scim.d71a498fb33f47c989bf297cea03c3c4.f0c62af6-6014-4b13-b910-bf71c2e3d97f')/schema/$entity",
-  "id": "scim.d71a498fb33f47c989bf297cea03c3c4.f0c62af6-6014-4b13-b910-bf71c2e3d97f",
-  "version": "Date:2022-03-22T14:37:37.3162492Z, ActivityId:1ae336ac-91be-49eb-bc09-6b9394163ea7",
+  "@odata.context": "https://graph.microsoft.com/beta/$metadata#servicePrincipals('7c71c6af-4200-47c1-95c3-35c99e1eb9fa')/synchronization/jobs('scim.26b523349614412995c30ed87e8cc800.83933a2e-fd29-4663-b033-14dd05516d16')/schema/$entity",
+  "id": "scim.26b523349614412995c30ed87e8cc800.83933a2e-fd29-4663-b033-14dd05516d16",
+  "version": "Date:2023-10-25T18:05:28.3823593Z, ActivityId:2fdec36e-9f1c-46ef-ac63-88a07098c569",
   "synchronizationRules": [
     {
+      "containerFilter": null,
       "editable": true,
+      "groupFilter": null,
       "id": "03f7d90d-bf71-41b1-bda6-aaf0ddbee5d8",
       "name": "USERGROUP_OUTBOUND_USERGROUP",
       "priority": 1,
@@ -13,7 +15,7 @@
       "metadata": [
         {
           "key": "defaultSourceObjectMappings",
-          "value": "[{\"AttributeMappings\":[{\"DefaultValue\":\"False\",\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":0,\"Source\":null,\"TargetAttributeName\":\"IsSoftDeleted\"},{\"DefaultValue\":\"True\",\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":0,\"Source\":null,\"TargetAttributeName\":\"accountEnabled\"},{\"DefaultValue\":\"en-US\",\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":0,\"Source\":null,\"TargetAttributeName\":\"preferredLanguage\"},{\"DefaultValue\":null,\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":1,\"Source\":null,\"TargetAttributeName\":\"userPrincipalName\"}],\"DisableMonitoringForChanges\":false,\"Disposition\":0,\"Enabled\":false,\"EscrowBehavior\":1,\"FlowTypes\":7,\"Internal\":false,\"IsCustomerDefined\":false,\"Name\":null,\"OriginalJoiningProperty\":\"userPrincipalName\",\"Scope\":null,\"SourceObjectName\":\"\",\"Synchronized\":false,\"TargetObjectName\":\"User\",\"Unsynchronized\":false},{\"AttributeMappings\":[{\"DefaultValue\":null,\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":1,\"Source\":null,\"TargetAttributeName\":\"displayName\"},{\"DefaultValue\":\"False\",\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":0,\"Source\":null,\"TargetAttributeName\":\"mailEnabled\"},{\"DefaultValue\":\"True\",\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":0,\"Source\":null,\"TargetAttributeName\":\"securityEnabled\"}],\"DisableMonitoringForChanges\":false,\"Disposition\":0,\"Enabled\":false,\"EscrowBehavior\":1,\"FlowTypes\":7,\"Internal\":false,\"IsCustomerDefined\":false,\"Name\":null,\"OriginalJoiningProperty\":\"displayName\",\"Scope\":null,\"SourceObjectName\":\"\",\"Synchronized\":false,\"TargetObjectName\":\"Group\",\"Unsynchronized\":false},{\"AttributeMappings\":[{\"DefaultValue\":null,\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":1,\"Source\":null,\"TargetAttributeName\":\"displayName\"}],\"DisableMonitoringForChanges\":false,\"Disposition\":0,\"Enabled\":false,\"EscrowBehavior\":1,\"FlowTypes\":7,\"Internal\":false,\"IsCustomerDefined\":false,\"Name\":null,\"OriginalJoiningProperty\":\"displayName\",\"Scope\":null,\"SourceObjectName\":\"\",\"Synchronized\":false,\"TargetObjectName\":\"ServicePrincipal\",\"Unsynchronized\":false},{\"AttributeMappings\":[{\"DefaultValue\":null,\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":1,\"Source\":null,\"TargetAttributeName\":\"appId\"}],\"DisableMonitoringForChanges\":false,\"Disposition\":0,\"Enabled\":false,\"EscrowBehavior\":1,\"FlowTypes\":7,\"Internal\":false,\"IsCustomerDefined\":false,\"Name\":null,\"OriginalJoiningProperty\":\"appId\",\"Scope\":null,\"SourceObjectName\":\"\",\"Synchronized\":false,\"TargetObjectName\":\"Application\",\"Unsynchronized\":false},{\"AttributeMappings\":[{\"DefaultValue\":\"User\",\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":0,\"Source\":null,\"TargetAttributeName\":\"allowedMemberTypes\"},{\"DefaultValue\":\".\",\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":0,\"Source\":null,\"TargetAttributeName\":\"description\"},{\"DefaultValue\":null,\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":1,\"Source\":null,\"TargetAttributeName\":\"displayName\"},{\"DefaultValue\":\"True\",\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":0,\"Source\":null,\"TargetAttributeName\":\"isEnabled\"}],\"DisableMonitoringForChanges\":false,\"Disposition\":0,\"Enabled\":false,\"EscrowBehavior\":1,\"FlowTypes\":7,\"Internal\":false,\"IsCustomerDefined\":false,\"Name\":null,\"OriginalJoiningProperty\":\"displayName\",\"Scope\":null,\"SourceObjectName\":\"\",\"Synchronized\":false,\"TargetObjectName\":\"AppRole\",\"Unsynchronized\":false},{\"AttributeMappings\":[{\"DefaultValue\":null,\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":1,\"Source\":null,\"TargetAttributeName\":\"id\"}],\"DisableMonitoringForChanges\":false,\"Disposition\":0,\"Enabled\":false,\"EscrowBehavior\":1,\"FlowTypes\":7,\"Internal\":false,\"IsCustomerDefined\":false,\"Name\":null,\"OriginalJoiningProperty\":\"id\",\"Scope\":null,\"SourceObjectName\":\"\",\"Synchronized\":false,\"TargetObjectName\":\"AppRoleAssignment\",\"Unsynchronized\":false}]"
+          "value": "[{\"AttributeMappings\":[{\"DefaultValue\":null,\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":1,\"Source\":null,\"TargetAttributeName\":\"objectId\"},{\"DefaultValue\":\"False\",\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":0,\"Source\":null,\"TargetAttributeName\":\"IsSoftDeleted\"},{\"DefaultValue\":\"True\",\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":0,\"Source\":null,\"TargetAttributeName\":\"accountEnabled\"},{\"DefaultValue\":\"en-US\",\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":0,\"Source\":null,\"TargetAttributeName\":\"preferredLanguage\"},{\"DefaultValue\":null,\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":2,\"Source\":null,\"TargetAttributeName\":\"userPrincipalName\"}],\"DisableMonitoringForChanges\":false,\"Disposition\":0,\"Enabled\":false,\"EscrowBehavior\":1,\"FlowTypes\":7,\"Internal\":false,\"IsCustomerDefined\":false,\"Name\":null,\"OriginalJoiningProperty\":\"userPrincipalName\",\"Scope\":null,\"SourceObjectName\":\"\",\"Synchronized\":false,\"TargetObjectName\":\"User\",\"Unsynchronized\":false},{\"AttributeMappings\":[{\"DefaultValue\":null,\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":1,\"Source\":null,\"TargetAttributeName\":\"displayName\"},{\"DefaultValue\":\"False\",\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":0,\"Source\":null,\"TargetAttributeName\":\"mailEnabled\"},{\"DefaultValue\":\"True\",\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":0,\"Source\":null,\"TargetAttributeName\":\"securityEnabled\"}],\"DisableMonitoringForChanges\":false,\"Disposition\":0,\"Enabled\":false,\"EscrowBehavior\":1,\"FlowTypes\":7,\"Internal\":false,\"IsCustomerDefined\":false,\"Name\":null,\"OriginalJoiningProperty\":\"displayName\",\"Scope\":null,\"SourceObjectName\":\"\",\"Synchronized\":false,\"TargetObjectName\":\"Group\",\"Unsynchronized\":false},{\"AttributeMappings\":[{\"DefaultValue\":null,\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":1,\"Source\":null,\"TargetAttributeName\":\"displayName\"}],\"DisableMonitoringForChanges\":false,\"Disposition\":0,\"Enabled\":false,\"EscrowBehavior\":1,\"FlowTypes\":7,\"Internal\":false,\"IsCustomerDefined\":false,\"Name\":null,\"OriginalJoiningProperty\":\"displayName\",\"Scope\":null,\"SourceObjectName\":\"\",\"Synchronized\":false,\"TargetObjectName\":\"ServicePrincipal\",\"Unsynchronized\":false},{\"AttributeMappings\":[{\"DefaultValue\":null,\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":1,\"Source\":null,\"TargetAttributeName\":\"appId\"}],\"DisableMonitoringForChanges\":false,\"Disposition\":0,\"Enabled\":false,\"EscrowBehavior\":1,\"FlowTypes\":7,\"Internal\":false,\"IsCustomerDefined\":false,\"Name\":null,\"OriginalJoiningProperty\":\"appId\",\"Scope\":null,\"SourceObjectName\":\"\",\"Synchronized\":false,\"TargetObjectName\":\"Application\",\"Unsynchronized\":false},{\"AttributeMappings\":[{\"DefaultValue\":\"User\",\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":0,\"Source\":null,\"TargetAttributeName\":\"allowedMemberTypes\"},{\"DefaultValue\":\".\",\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":0,\"Source\":null,\"TargetAttributeName\":\"description\"},{\"DefaultValue\":null,\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":1,\"Source\":null,\"TargetAttributeName\":\"displayName\"},{\"DefaultValue\":\"True\",\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":0,\"Source\":null,\"TargetAttributeName\":\"isEnabled\"}],\"DisableMonitoringForChanges\":false,\"Disposition\":0,\"Enabled\":false,\"EscrowBehavior\":1,\"FlowTypes\":7,\"Internal\":false,\"IsCustomerDefined\":false,\"Name\":null,\"OriginalJoiningProperty\":\"displayName\",\"Scope\":null,\"SourceObjectName\":\"\",\"Synchronized\":false,\"TargetObjectName\":\"AppRole\",\"Unsynchronized\":false},{\"AttributeMappings\":[{\"DefaultValue\":null,\"ExportMissingReferences\":false,\"FlowBehavior\":0,\"FlowType\":0,\"MatchingPriority\":1,\"Source\":null,\"TargetAttributeName\":\"id\"}],\"DisableMonitoringForChanges\":false,\"Disposition\":0,\"Enabled\":false,\"EscrowBehavior\":1,\"FlowTypes\":7,\"Internal\":false,\"IsCustomerDefined\":false,\"Name\":null,\"OriginalJoiningProperty\":\"id\",\"Scope\":null,\"SourceObjectName\":\"\",\"Synchronized\":false,\"TargetObjectName\":\"AppRoleAssignment\",\"Unsynchronized\":false}]"
         },
         {
           "key": "supportsProvisionOnDemand",
@@ -380,6 +382,22 @@
                 "type": "Attribute",
                 "parameters": []
               }
+            },
+            {
+              "defaultValue": "false",
+              "exportMissingReferences": false,
+              "flowBehavior": "FlowWhenChanged",
+              "flowType": "Always",
+              "matchingPriority": 0,
+              "targetAttributeName": "urn:ietf:params:scim:schemas:extension:stauserextension:2.0:User:isSecondary"
+            },
+            {
+              "defaultValue": "",
+              "exportMissingReferences": false,
+              "flowBehavior": "FlowWhenChanged",
+              "flowType": "Always",
+              "matchingPriority": 0,
+              "targetAttributeName": "urn:ietf:params:scim:schemas:extension:stauserextension:2.0:User:primaryObjectId"
             }
           ],
           "metadata": [
@@ -416,7 +434,7 @@
       ]
     }
   ],
-  "directories@odata.context": "https://graph.microsoft.com/beta/$metadata#servicePrincipals('99226b1a-ebaa-4541-ada8-34e4c7219110')/synchronization/jobs('scim.d71a498fb33f47c989bf297cea03c3c4.f0c62af6-6014-4b13-b910-bf71c2e3d97f')/schema/directories",
+  "directories@odata.context": "https://graph.microsoft.com/beta/$metadata#servicePrincipals('7c71c6af-4200-47c1-95c3-35c99e1eb9fa')/synchronization/jobs('scim.26b523349614412995c30ed87e8cc800.83933a2e-fd29-4663-b033-14dd05516d16')/schema/directories",
   "directories": [
     {
       "id": "66e4a8cc-1b7b-435e-95f8-f06cea133828",
@@ -424,7 +442,7 @@
       "discoverabilities": "AttributeNames,AttributeDataTypes",
       "name": "Azure Active Directory",
       "readOnly": true,
-      "version": "Date:2022-03-22T14:37:37.3162492Z, ActivityId:1ae336ac-91be-49eb-bc09-6b9394163ea7",
+      "version": "Date:2023-10-25T18:05:28.3823593Z, ActivityId:2fdec36e-9f1c-46ef-ac63-88a07098c569",
       "objects": [
         {
           "name": "User",
@@ -670,7 +688,7 @@
               "metadata": [
                 {
                   "key": "ComplexObjectDefinition",
-                  "value": "{\"definition\":{\"attributes\":[{\"anchor\":true,\"apiExpressions\":[],\"metadata\":[],\"name\":\"objectId\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"id\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[{\"key\":\"ComplexObjectDefinition\",\"value\":\"{\\\"definition\\\":{\\\"attributes\\\":[{\\\"anchor\\\":true,\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"id\\\",\\\"required\\\":true},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"multivalued\\\":true,\\\"name\\\":\\\"allowedMemberTypes\\\",\\\"required\\\":true},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"description\\\",\\\"required\\\":true},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"displayName\\\",\\\"required\\\":true},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"isEnabled\\\",\\\"required\\\":true,\\\"type\\\":\\\"Boolean\\\"},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"origin\\\"},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"value\\\"}],\\\"metadata\\\":[{\\\"key\\\":\\\"IsSoftDeletionSupported\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"ConnectorDataStorageRequired\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"IsSynchronizeAllSupported\\\",\\\"value\\\":\\\"false\\\"}],\\\"name\\\":\\\"AppRole\\\",\\\"supportedApis\\\":[\\\"AppRole\\\"]},\\\"mapping\\\":{\\\"attributeMappings\\\":[{\\\"defaultValue\\\":\\\"User\\\",\\\"targetAttributeName\\\":\\\"allowedMemberTypes\\\"},{\\\"defaultValue\\\":\\\".\\\",\\\"targetAttributeName\\\":\\\"description\\\"},{\\\"matchingPriority\\\":1,\\\"targetAttributeName\\\":\\\"displayName\\\"},{\\\"defaultValue\\\":\\\"True\\\",\\\"targetAttributeName\\\":\\\"isEnabled\\\"}],\\\"flowTypes\\\":\\\"Add, Update, Delete\\\",\\\"metadata\\\":[{\\\"key\\\":\\\"IsCustomerDefined\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"DisableMonitoringForChanges\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"Disposition\\\",\\\"value\\\":\\\"\\\\\\\"Normal\\\\\\\"\\\"},{\\\"key\\\":\\\"ExcludeFromReporting\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"EscrowBehavior\\\",\\\"value\\\":\\\"\\\\\\\"Default\\\\\\\"\\\"},{\\\"key\\\":\\\"Unsynchronized\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"OriginalJoiningProperty\\\",\\\"value\\\":\\\"displayName\\\"}],\\\"sourceObjectName\\\":\\\"\\\",\\\"targetObjectName\\\":\\\"AppRole\\\"}}\"}],\"name\":\"entitlement\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"principalId\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"principalType\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"resourceId\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"resourceDisplayName\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"servicePrincipalApplicationIdentifier\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"displayName\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"value\"}],\"metadata\":[{\"key\":\"IsSoftDeletionSupported\",\"value\":\"true\"},{\"key\":\"ConnectorDataStorageRequired\",\"value\":\"false\"},{\"key\":\"IsSynchronizeAllSupported\",\"value\":\"false\"},{\"key\":\"PropertyNameSoftDeleted\",\"value\":\"IsSoftDeleted\"}],\"name\":\"AppRoleAssignment\",\"supportedApis\":[\"AppRoleAssignment\"]},\"mapping\":{\"attributeMappings\":[{\"matchingPriority\":1,\"targetAttributeName\":\"id\"}],\"flowTypes\":\"Add, Update, Delete\",\"metadata\":[{\"key\":\"IsCustomerDefined\",\"value\":\"false\"},{\"key\":\"DisableMonitoringForChanges\",\"value\":\"false\"},{\"key\":\"Disposition\",\"value\":\"\\\"Normal\\\"\"},{\"key\":\"ExcludeFromReporting\",\"value\":\"false\"},{\"key\":\"EscrowBehavior\",\"value\":\"\\\"Default\\\"\"},{\"key\":\"Unsynchronized\",\"value\":\"false\"},{\"key\":\"OriginalJoiningProperty\",\"value\":\"id\"}],\"sourceObjectName\":\"\",\"targetObjectName\":\"AppRoleAssignment\"}}"
+                  "value": "{\"definition\":{\"attributes\":[{\"anchor\":true,\"apiExpressions\":[],\"metadata\":[],\"name\":\"objectId\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"id\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[{\"key\":\"ComplexObjectDefinition\",\"value\":\"{\\\"definition\\\":{\\\"attributes\\\":[{\\\"anchor\\\":true,\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"id\\\",\\\"required\\\":true},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"multivalued\\\":true,\\\"name\\\":\\\"allowedMemberTypes\\\",\\\"required\\\":true},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"description\\\",\\\"required\\\":true},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"displayName\\\",\\\"required\\\":true},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"isEnabled\\\",\\\"required\\\":true,\\\"type\\\":\\\"Boolean\\\"},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"origin\\\"},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"value\\\"}],\\\"metadata\\\":[{\\\"key\\\":\\\"IsSoftDeletionSupported\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"IsHardDeletionSupported\\\",\\\"value\\\":\\\"true\\\"},{\\\"key\\\":\\\"ConnectorDataStorageRequired\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"IsSynchronizeAllSupported\\\",\\\"value\\\":\\\"false\\\"}],\\\"name\\\":\\\"AppRole\\\",\\\"supportedApis\\\":[\\\"AppRole\\\"]},\\\"mapping\\\":{\\\"attributeMappings\\\":[{\\\"defaultValue\\\":\\\"User\\\",\\\"targetAttributeName\\\":\\\"allowedMemberTypes\\\"},{\\\"defaultValue\\\":\\\".\\\",\\\"targetAttributeName\\\":\\\"description\\\"},{\\\"matchingPriority\\\":1,\\\"targetAttributeName\\\":\\\"displayName\\\"},{\\\"defaultValue\\\":\\\"True\\\",\\\"targetAttributeName\\\":\\\"isEnabled\\\"}],\\\"flowTypes\\\":\\\"Add, Update, Delete\\\",\\\"metadata\\\":[{\\\"key\\\":\\\"IsCustomerDefined\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"DisableMonitoringForChanges\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"Disposition\\\",\\\"value\\\":\\\"\\\\\\\"Normal\\\\\\\"\\\"},{\\\"key\\\":\\\"ExcludeFromReporting\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"EscrowBehavior\\\",\\\"value\\\":\\\"\\\\\\\"Default\\\\\\\"\\\"},{\\\"key\\\":\\\"Unsynchronized\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"OriginalJoiningProperty\\\",\\\"value\\\":\\\"displayName\\\"}],\\\"sourceObjectName\\\":\\\"\\\",\\\"targetObjectName\\\":\\\"AppRole\\\"}}\"}],\"name\":\"entitlement\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"principalId\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"principalType\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"resourceId\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"resourceDisplayName\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"servicePrincipalApplicationIdentifier\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"displayName\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"value\"}],\"metadata\":[{\"key\":\"IsSoftDeletionSupported\",\"value\":\"true\"},{\"key\":\"IsHardDeletionSupported\",\"value\":\"true\"},{\"key\":\"ConnectorDataStorageRequired\",\"value\":\"false\"},{\"key\":\"IsSynchronizeAllSupported\",\"value\":\"false\"},{\"key\":\"PropertyNameSoftDeleted\",\"value\":\"IsSoftDeleted\"}],\"name\":\"AppRoleAssignment\",\"supportedApis\":[\"AppRoleAssignment\"]},\"mapping\":{\"attributeMappings\":[{\"matchingPriority\":1,\"targetAttributeName\":\"id\"}],\"flowTypes\":\"Add, Update, Delete\",\"metadata\":[{\"key\":\"IsCustomerDefined\",\"value\":\"false\"},{\"key\":\"DisableMonitoringForChanges\",\"value\":\"false\"},{\"key\":\"Disposition\",\"value\":\"\\\"Normal\\\"\"},{\"key\":\"ExcludeFromReporting\",\"value\":\"false\"},{\"key\":\"EscrowBehavior\",\"value\":\"\\\"Default\\\"\"},{\"key\":\"Unsynchronized\",\"value\":\"false\"},{\"key\":\"OriginalJoiningProperty\",\"value\":\"id\"}],\"sourceObjectName\":\"\",\"targetObjectName\":\"AppRoleAssignment\"}}"
                 }
               ],
               "referencedObjects": []
@@ -1146,11 +1164,57 @@
               "apiExpressions": [],
               "metadata": [],
               "referencedObjects": []
+            },
+            {
+              "anchor": false,
+              "caseExact": false,
+              "defaultValue": null,
+              "flowNullValues": false,
+              "multivalued": false,
+              "mutability": "ReadWrite",
+              "name": "employeeLeaveDateTime",
+              "required": false,
+              "type": "String",
+              "apiExpressions": [],
+              "metadata": [],
+              "referencedObjects": []
+            },
+            {
+              "anchor": false,
+              "caseExact": false,
+              "defaultValue": null,
+              "flowNullValues": false,
+              "multivalued": false,
+              "mutability": "ReadWrite",
+              "name": "employeeOrgData.costCenter",
+              "required": false,
+              "type": "String",
+              "apiExpressions": [],
+              "metadata": [],
+              "referencedObjects": []
+            },
+            {
+              "anchor": false,
+              "caseExact": false,
+              "defaultValue": null,
+              "flowNullValues": false,
+              "multivalued": false,
+              "mutability": "ReadWrite",
+              "name": "employeeOrgData.division",
+              "required": false,
+              "type": "String",
+              "apiExpressions": [],
+              "metadata": [],
+              "referencedObjects": []
             }
           ],
           "metadata": [
             {
               "key": "IsSoftDeletionSupported",
+              "value": "true"
+            },
+            {
+              "key": "IsHardDeletionSupported",
               "value": "true"
             },
             {
@@ -1219,7 +1283,7 @@
               "metadata": [
                 {
                   "key": "ComplexObjectDefinition",
-                  "value": "{\"definition\":{\"attributes\":[{\"anchor\":true,\"apiExpressions\":[],\"metadata\":[],\"name\":\"objectId\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"id\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[{\"key\":\"ComplexObjectDefinition\",\"value\":\"{\\\"definition\\\":{\\\"attributes\\\":[{\\\"anchor\\\":true,\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"id\\\",\\\"required\\\":true},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"multivalued\\\":true,\\\"name\\\":\\\"allowedMemberTypes\\\",\\\"required\\\":true},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"description\\\",\\\"required\\\":true},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"displayName\\\",\\\"required\\\":true},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"isEnabled\\\",\\\"required\\\":true,\\\"type\\\":\\\"Boolean\\\"},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"origin\\\"},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"value\\\"}],\\\"metadata\\\":[{\\\"key\\\":\\\"IsSoftDeletionSupported\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"ConnectorDataStorageRequired\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"IsSynchronizeAllSupported\\\",\\\"value\\\":\\\"false\\\"}],\\\"name\\\":\\\"AppRole\\\",\\\"supportedApis\\\":[\\\"AppRole\\\"]},\\\"mapping\\\":{\\\"attributeMappings\\\":[{\\\"defaultValue\\\":\\\"User\\\",\\\"targetAttributeName\\\":\\\"allowedMemberTypes\\\"},{\\\"defaultValue\\\":\\\".\\\",\\\"targetAttributeName\\\":\\\"description\\\"},{\\\"matchingPriority\\\":1,\\\"targetAttributeName\\\":\\\"displayName\\\"},{\\\"defaultValue\\\":\\\"True\\\",\\\"targetAttributeName\\\":\\\"isEnabled\\\"}],\\\"flowTypes\\\":\\\"Add, Update, Delete\\\",\\\"metadata\\\":[{\\\"key\\\":\\\"IsCustomerDefined\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"DisableMonitoringForChanges\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"Disposition\\\",\\\"value\\\":\\\"\\\\\\\"Normal\\\\\\\"\\\"},{\\\"key\\\":\\\"ExcludeFromReporting\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"EscrowBehavior\\\",\\\"value\\\":\\\"\\\\\\\"Default\\\\\\\"\\\"},{\\\"key\\\":\\\"Unsynchronized\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"OriginalJoiningProperty\\\",\\\"value\\\":\\\"displayName\\\"}],\\\"sourceObjectName\\\":\\\"\\\",\\\"targetObjectName\\\":\\\"AppRole\\\"}}\"}],\"name\":\"entitlement\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"principalId\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"principalType\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"resourceId\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"resourceDisplayName\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"servicePrincipalApplicationIdentifier\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"displayName\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"value\"}],\"metadata\":[{\"key\":\"IsSoftDeletionSupported\",\"value\":\"true\"},{\"key\":\"ConnectorDataStorageRequired\",\"value\":\"false\"},{\"key\":\"IsSynchronizeAllSupported\",\"value\":\"false\"},{\"key\":\"PropertyNameSoftDeleted\",\"value\":\"IsSoftDeleted\"}],\"name\":\"AppRoleAssignment\",\"supportedApis\":[\"AppRoleAssignment\"]},\"mapping\":{\"attributeMappings\":[{\"matchingPriority\":1,\"targetAttributeName\":\"id\"}],\"flowTypes\":\"Add, Update, Delete\",\"metadata\":[{\"key\":\"IsCustomerDefined\",\"value\":\"false\"},{\"key\":\"DisableMonitoringForChanges\",\"value\":\"false\"},{\"key\":\"Disposition\",\"value\":\"\\\"Normal\\\"\"},{\"key\":\"ExcludeFromReporting\",\"value\":\"false\"},{\"key\":\"EscrowBehavior\",\"value\":\"\\\"Default\\\"\"},{\"key\":\"Unsynchronized\",\"value\":\"false\"},{\"key\":\"OriginalJoiningProperty\",\"value\":\"id\"}],\"sourceObjectName\":\"\",\"targetObjectName\":\"AppRoleAssignment\"}}"
+                  "value": "{\"definition\":{\"attributes\":[{\"anchor\":true,\"apiExpressions\":[],\"metadata\":[],\"name\":\"objectId\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"id\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[{\"key\":\"ComplexObjectDefinition\",\"value\":\"{\\\"definition\\\":{\\\"attributes\\\":[{\\\"anchor\\\":true,\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"id\\\",\\\"required\\\":true},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"multivalued\\\":true,\\\"name\\\":\\\"allowedMemberTypes\\\",\\\"required\\\":true},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"description\\\",\\\"required\\\":true},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"displayName\\\",\\\"required\\\":true},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"isEnabled\\\",\\\"required\\\":true,\\\"type\\\":\\\"Boolean\\\"},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"origin\\\"},{\\\"apiExpressions\\\":[],\\\"metadata\\\":[],\\\"name\\\":\\\"value\\\"}],\\\"metadata\\\":[{\\\"key\\\":\\\"IsSoftDeletionSupported\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"IsHardDeletionSupported\\\",\\\"value\\\":\\\"true\\\"},{\\\"key\\\":\\\"ConnectorDataStorageRequired\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"IsSynchronizeAllSupported\\\",\\\"value\\\":\\\"false\\\"}],\\\"name\\\":\\\"AppRole\\\",\\\"supportedApis\\\":[\\\"AppRole\\\"]},\\\"mapping\\\":{\\\"attributeMappings\\\":[{\\\"defaultValue\\\":\\\"User\\\",\\\"targetAttributeName\\\":\\\"allowedMemberTypes\\\"},{\\\"defaultValue\\\":\\\".\\\",\\\"targetAttributeName\\\":\\\"description\\\"},{\\\"matchingPriority\\\":1,\\\"targetAttributeName\\\":\\\"displayName\\\"},{\\\"defaultValue\\\":\\\"True\\\",\\\"targetAttributeName\\\":\\\"isEnabled\\\"}],\\\"flowTypes\\\":\\\"Add, Update, Delete\\\",\\\"metadata\\\":[{\\\"key\\\":\\\"IsCustomerDefined\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"DisableMonitoringForChanges\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"Disposition\\\",\\\"value\\\":\\\"\\\\\\\"Normal\\\\\\\"\\\"},{\\\"key\\\":\\\"ExcludeFromReporting\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"EscrowBehavior\\\",\\\"value\\\":\\\"\\\\\\\"Default\\\\\\\"\\\"},{\\\"key\\\":\\\"Unsynchronized\\\",\\\"value\\\":\\\"false\\\"},{\\\"key\\\":\\\"OriginalJoiningProperty\\\",\\\"value\\\":\\\"displayName\\\"}],\\\"sourceObjectName\\\":\\\"\\\",\\\"targetObjectName\\\":\\\"AppRole\\\"}}\"}],\"name\":\"entitlement\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"principalId\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"principalType\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"resourceId\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"resourceDisplayName\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"servicePrincipalApplicationIdentifier\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"displayName\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"value\"}],\"metadata\":[{\"key\":\"IsSoftDeletionSupported\",\"value\":\"true\"},{\"key\":\"IsHardDeletionSupported\",\"value\":\"true\"},{\"key\":\"ConnectorDataStorageRequired\",\"value\":\"false\"},{\"key\":\"IsSynchronizeAllSupported\",\"value\":\"false\"},{\"key\":\"PropertyNameSoftDeleted\",\"value\":\"IsSoftDeleted\"}],\"name\":\"AppRoleAssignment\",\"supportedApis\":[\"AppRoleAssignment\"]},\"mapping\":{\"attributeMappings\":[{\"matchingPriority\":1,\"targetAttributeName\":\"id\"}],\"flowTypes\":\"Add, Update, Delete\",\"metadata\":[{\"key\":\"IsCustomerDefined\",\"value\":\"false\"},{\"key\":\"DisableMonitoringForChanges\",\"value\":\"false\"},{\"key\":\"Disposition\",\"value\":\"\\\"Normal\\\"\"},{\"key\":\"ExcludeFromReporting\",\"value\":\"false\"},{\"key\":\"EscrowBehavior\",\"value\":\"\\\"Default\\\"\"},{\"key\":\"Unsynchronized\",\"value\":\"false\"},{\"key\":\"OriginalJoiningProperty\",\"value\":\"id\"}],\"sourceObjectName\":\"\",\"targetObjectName\":\"AppRoleAssignment\"}}"
                 }
               ],
               "referencedObjects": []
@@ -1623,6 +1687,10 @@
               "value": "false"
             },
             {
+              "key": "IsHardDeletionSupported",
+              "value": "true"
+            },
+            {
               "key": "ConnectorDataStorageRequired",
               "value": "true"
             },
@@ -1698,7 +1766,7 @@
               "metadata": [
                 {
                   "key": "ComplexObjectDefinition",
-                  "value": "{\"definition\":{\"attributes\":[{\"anchor\":true,\"apiExpressions\":[],\"metadata\":[],\"name\":\"id\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"multivalued\":true,\"name\":\"allowedMemberTypes\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"description\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"displayName\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"isEnabled\",\"required\":true,\"type\":\"Boolean\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"origin\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"value\"}],\"metadata\":[{\"key\":\"IsSoftDeletionSupported\",\"value\":\"false\"},{\"key\":\"ConnectorDataStorageRequired\",\"value\":\"false\"},{\"key\":\"IsSynchronizeAllSupported\",\"value\":\"false\"}],\"name\":\"AppRole\",\"supportedApis\":[\"AppRole\"]},\"mapping\":{\"attributeMappings\":[{\"defaultValue\":\"User\",\"targetAttributeName\":\"allowedMemberTypes\"},{\"defaultValue\":\".\",\"targetAttributeName\":\"description\"},{\"matchingPriority\":1,\"targetAttributeName\":\"displayName\"},{\"defaultValue\":\"True\",\"targetAttributeName\":\"isEnabled\"}],\"flowTypes\":\"Add, Update, Delete\",\"metadata\":[{\"key\":\"IsCustomerDefined\",\"value\":\"false\"},{\"key\":\"DisableMonitoringForChanges\",\"value\":\"false\"},{\"key\":\"Disposition\",\"value\":\"\\\"Normal\\\"\"},{\"key\":\"ExcludeFromReporting\",\"value\":\"false\"},{\"key\":\"EscrowBehavior\",\"value\":\"\\\"Default\\\"\"},{\"key\":\"Unsynchronized\",\"value\":\"false\"},{\"key\":\"OriginalJoiningProperty\",\"value\":\"displayName\"}],\"sourceObjectName\":\"\",\"targetObjectName\":\"AppRole\"}}"
+                  "value": "{\"definition\":{\"attributes\":[{\"anchor\":true,\"apiExpressions\":[],\"metadata\":[],\"name\":\"id\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"multivalued\":true,\"name\":\"allowedMemberTypes\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"description\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"displayName\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"isEnabled\",\"required\":true,\"type\":\"Boolean\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"origin\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"value\"}],\"metadata\":[{\"key\":\"IsSoftDeletionSupported\",\"value\":\"false\"},{\"key\":\"IsHardDeletionSupported\",\"value\":\"true\"},{\"key\":\"ConnectorDataStorageRequired\",\"value\":\"false\"},{\"key\":\"IsSynchronizeAllSupported\",\"value\":\"false\"}],\"name\":\"AppRole\",\"supportedApis\":[\"AppRole\"]},\"mapping\":{\"attributeMappings\":[{\"defaultValue\":\"User\",\"targetAttributeName\":\"allowedMemberTypes\"},{\"defaultValue\":\".\",\"targetAttributeName\":\"description\"},{\"matchingPriority\":1,\"targetAttributeName\":\"displayName\"},{\"defaultValue\":\"True\",\"targetAttributeName\":\"isEnabled\"}],\"flowTypes\":\"Add, Update, Delete\",\"metadata\":[{\"key\":\"IsCustomerDefined\",\"value\":\"false\"},{\"key\":\"DisableMonitoringForChanges\",\"value\":\"false\"},{\"key\":\"Disposition\",\"value\":\"\\\"Normal\\\"\"},{\"key\":\"ExcludeFromReporting\",\"value\":\"false\"},{\"key\":\"EscrowBehavior\",\"value\":\"\\\"Default\\\"\"},{\"key\":\"Unsynchronized\",\"value\":\"false\"},{\"key\":\"OriginalJoiningProperty\",\"value\":\"displayName\"}],\"sourceObjectName\":\"\",\"targetObjectName\":\"AppRole\"}}"
                 }
               ],
               "referencedObjects": []
@@ -1764,6 +1832,10 @@
             {
               "key": "IsSoftDeletionSupported",
               "value": "false"
+            },
+            {
+              "key": "IsHardDeletionSupported",
+              "value": "true"
             },
             {
               "key": "ConnectorDataStorageRequired",
@@ -1855,7 +1927,7 @@
               "metadata": [
                 {
                   "key": "ComplexObjectDefinition",
-                  "value": "{\"definition\":{\"attributes\":[{\"anchor\":true,\"apiExpressions\":[],\"metadata\":[],\"name\":\"id\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"multivalued\":true,\"name\":\"allowedMemberTypes\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"description\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"displayName\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"isEnabled\",\"required\":true,\"type\":\"Boolean\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"origin\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"value\"}],\"metadata\":[{\"key\":\"IsSoftDeletionSupported\",\"value\":\"false\"},{\"key\":\"ConnectorDataStorageRequired\",\"value\":\"false\"},{\"key\":\"IsSynchronizeAllSupported\",\"value\":\"false\"}],\"name\":\"AppRole\",\"supportedApis\":[\"AppRole\"]},\"mapping\":{\"attributeMappings\":[{\"defaultValue\":\"User\",\"targetAttributeName\":\"allowedMemberTypes\"},{\"defaultValue\":\".\",\"targetAttributeName\":\"description\"},{\"matchingPriority\":1,\"targetAttributeName\":\"displayName\"},{\"defaultValue\":\"True\",\"targetAttributeName\":\"isEnabled\"}],\"flowTypes\":\"Add, Update, Delete\",\"metadata\":[{\"key\":\"IsCustomerDefined\",\"value\":\"false\"},{\"key\":\"DisableMonitoringForChanges\",\"value\":\"false\"},{\"key\":\"Disposition\",\"value\":\"\\\"Normal\\\"\"},{\"key\":\"ExcludeFromReporting\",\"value\":\"false\"},{\"key\":\"EscrowBehavior\",\"value\":\"\\\"Default\\\"\"},{\"key\":\"Unsynchronized\",\"value\":\"false\"},{\"key\":\"OriginalJoiningProperty\",\"value\":\"displayName\"}],\"sourceObjectName\":\"\",\"targetObjectName\":\"AppRole\"}}"
+                  "value": "{\"definition\":{\"attributes\":[{\"anchor\":true,\"apiExpressions\":[],\"metadata\":[],\"name\":\"id\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"multivalued\":true,\"name\":\"allowedMemberTypes\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"description\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"displayName\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"isEnabled\",\"required\":true,\"type\":\"Boolean\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"origin\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"value\"}],\"metadata\":[{\"key\":\"IsSoftDeletionSupported\",\"value\":\"false\"},{\"key\":\"IsHardDeletionSupported\",\"value\":\"true\"},{\"key\":\"ConnectorDataStorageRequired\",\"value\":\"false\"},{\"key\":\"IsSynchronizeAllSupported\",\"value\":\"false\"}],\"name\":\"AppRole\",\"supportedApis\":[\"AppRole\"]},\"mapping\":{\"attributeMappings\":[{\"defaultValue\":\"User\",\"targetAttributeName\":\"allowedMemberTypes\"},{\"defaultValue\":\".\",\"targetAttributeName\":\"description\"},{\"matchingPriority\":1,\"targetAttributeName\":\"displayName\"},{\"defaultValue\":\"True\",\"targetAttributeName\":\"isEnabled\"}],\"flowTypes\":\"Add, Update, Delete\",\"metadata\":[{\"key\":\"IsCustomerDefined\",\"value\":\"false\"},{\"key\":\"DisableMonitoringForChanges\",\"value\":\"false\"},{\"key\":\"Disposition\",\"value\":\"\\\"Normal\\\"\"},{\"key\":\"ExcludeFromReporting\",\"value\":\"false\"},{\"key\":\"EscrowBehavior\",\"value\":\"\\\"Default\\\"\"},{\"key\":\"Unsynchronized\",\"value\":\"false\"},{\"key\":\"OriginalJoiningProperty\",\"value\":\"displayName\"}],\"sourceObjectName\":\"\",\"targetObjectName\":\"AppRole\"}}"
                 }
               ],
               "referencedObjects": []
@@ -1907,6 +1979,10 @@
             {
               "key": "IsSoftDeletionSupported",
               "value": "false"
+            },
+            {
+              "key": "IsHardDeletionSupported",
+              "value": "true"
             },
             {
               "key": "ConnectorDataStorageRequired",
@@ -2029,6 +2105,10 @@
               "value": "false"
             },
             {
+              "key": "IsHardDeletionSupported",
+              "value": "true"
+            },
+            {
               "key": "ConnectorDataStorageRequired",
               "value": "false"
             },
@@ -2086,7 +2166,7 @@
               "metadata": [
                 {
                   "key": "ComplexObjectDefinition",
-                  "value": "{\"definition\":{\"attributes\":[{\"anchor\":true,\"apiExpressions\":[],\"metadata\":[],\"name\":\"id\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"multivalued\":true,\"name\":\"allowedMemberTypes\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"description\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"displayName\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"isEnabled\",\"required\":true,\"type\":\"Boolean\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"origin\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"value\"}],\"metadata\":[{\"key\":\"IsSoftDeletionSupported\",\"value\":\"false\"},{\"key\":\"ConnectorDataStorageRequired\",\"value\":\"false\"},{\"key\":\"IsSynchronizeAllSupported\",\"value\":\"false\"}],\"name\":\"AppRole\",\"supportedApis\":[\"AppRole\"]},\"mapping\":{\"attributeMappings\":[{\"defaultValue\":\"User\",\"targetAttributeName\":\"allowedMemberTypes\"},{\"defaultValue\":\".\",\"targetAttributeName\":\"description\"},{\"matchingPriority\":1,\"targetAttributeName\":\"displayName\"},{\"defaultValue\":\"True\",\"targetAttributeName\":\"isEnabled\"}],\"flowTypes\":\"Add, Update, Delete\",\"metadata\":[{\"key\":\"IsCustomerDefined\",\"value\":\"false\"},{\"key\":\"DisableMonitoringForChanges\",\"value\":\"false\"},{\"key\":\"Disposition\",\"value\":\"\\\"Normal\\\"\"},{\"key\":\"ExcludeFromReporting\",\"value\":\"false\"},{\"key\":\"EscrowBehavior\",\"value\":\"\\\"Default\\\"\"},{\"key\":\"Unsynchronized\",\"value\":\"false\"},{\"key\":\"OriginalJoiningProperty\",\"value\":\"displayName\"}],\"sourceObjectName\":\"\",\"targetObjectName\":\"AppRole\"}}"
+                  "value": "{\"definition\":{\"attributes\":[{\"anchor\":true,\"apiExpressions\":[],\"metadata\":[],\"name\":\"id\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"multivalued\":true,\"name\":\"allowedMemberTypes\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"description\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"displayName\",\"required\":true},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"isEnabled\",\"required\":true,\"type\":\"Boolean\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"origin\"},{\"apiExpressions\":[],\"metadata\":[],\"name\":\"value\"}],\"metadata\":[{\"key\":\"IsSoftDeletionSupported\",\"value\":\"false\"},{\"key\":\"IsHardDeletionSupported\",\"value\":\"true\"},{\"key\":\"ConnectorDataStorageRequired\",\"value\":\"false\"},{\"key\":\"IsSynchronizeAllSupported\",\"value\":\"false\"}],\"name\":\"AppRole\",\"supportedApis\":[\"AppRole\"]},\"mapping\":{\"attributeMappings\":[{\"defaultValue\":\"User\",\"targetAttributeName\":\"allowedMemberTypes\"},{\"defaultValue\":\".\",\"targetAttributeName\":\"description\"},{\"matchingPriority\":1,\"targetAttributeName\":\"displayName\"},{\"defaultValue\":\"True\",\"targetAttributeName\":\"isEnabled\"}],\"flowTypes\":\"Add, Update, Delete\",\"metadata\":[{\"key\":\"IsCustomerDefined\",\"value\":\"false\"},{\"key\":\"DisableMonitoringForChanges\",\"value\":\"false\"},{\"key\":\"Disposition\",\"value\":\"\\\"Normal\\\"\"},{\"key\":\"ExcludeFromReporting\",\"value\":\"false\"},{\"key\":\"EscrowBehavior\",\"value\":\"\\\"Default\\\"\"},{\"key\":\"Unsynchronized\",\"value\":\"false\"},{\"key\":\"OriginalJoiningProperty\",\"value\":\"displayName\"}],\"sourceObjectName\":\"\",\"targetObjectName\":\"AppRole\"}}"
                 }
               ],
               "referencedObjects": []
@@ -2196,6 +2276,10 @@
               "value": "true"
             },
             {
+              "key": "IsHardDeletionSupported",
+              "value": "true"
+            },
+            {
               "key": "ConnectorDataStorageRequired",
               "value": "false"
             },
@@ -2217,7 +2301,7 @@
       "discoverabilities": "None",
       "name": "customappsso",
       "readOnly": false,
-      "version": "Date:2022-03-22T14:37:37.3162492Z, ActivityId:1ae336ac-91be-49eb-bc09-6b9394163ea7",
+      "version": "Date:2023-10-25T18:05:28.3823593Z, ActivityId:2fdec36e-9f1c-46ef-ac63-88a07098c569",
       "objects": [
         {
           "name": "urn:ietf:params:scim:schemas:core:2.0:Group",
@@ -2328,6 +2412,10 @@
             {
               "key": "IsSoftDeletionSupported",
               "value": "false"
+            },
+            {
+              "key": "IsHardDeletionSupported",
+              "value": "true"
             },
             {
               "key": "ConnectorDataStorageRequired",
@@ -3306,12 +3394,44 @@
               "apiExpressions": [],
               "metadata": [],
               "referencedObjects": []
+            },
+            {
+              "anchor": false,
+              "caseExact": false,
+              "defaultValue": null,
+              "flowNullValues": false,
+              "multivalued": false,
+              "mutability": "ReadWrite",
+              "name": "urn:ietf:params:scim:schemas:extension:stauserextension:2.0:User:isSecondary",
+              "required": false,
+              "type": "Boolean",
+              "apiExpressions": [],
+              "metadata": [],
+              "referencedObjects": []
+            },
+            {
+              "anchor": false,
+              "caseExact": false,
+              "defaultValue": null,
+              "flowNullValues": false,
+              "multivalued": false,
+              "mutability": "ReadWrite",
+              "name": "urn:ietf:params:scim:schemas:extension:stauserextension:2.0:User:primaryObjectId",
+              "required": false,
+              "type": "String",
+              "apiExpressions": [],
+              "metadata": [],
+              "referencedObjects": []
             }
           ],
           "metadata": [
             {
               "key": "IsSoftDeletionSupported",
               "value": "false"
+            },
+            {
+              "key": "IsHardDeletionSupported",
+              "value": "true"
             },
             {
               "key": "ConnectorDataStorageRequired",
