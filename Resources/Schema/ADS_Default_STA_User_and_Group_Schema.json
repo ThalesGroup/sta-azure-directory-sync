@@ -380,24 +380,6 @@
                 "type": "Attribute",
                 "parameters": []
               }
-            },
-            {
-              "defaultValue": "false",
-              "exportMissingReferences": false,
-              "flowBehavior": "FlowWhenChanged",
-              "flowType": "Always",
-              "matchingPriority": 0,
-			  "source": null,
-              "targetAttributeName": "urn:ietf:params:scim:schemas:extension:stauserextension:2.0:User:isSecondary"
-            },
-            {
-              "defaultValue": "",
-              "exportMissingReferences": false,
-              "flowBehavior": "FlowWhenChanged",
-              "flowType": "Always",
-              "matchingPriority": 0,
-			  "source": null,
-              "targetAttributeName": "urn:ietf:params:scim:schemas:extension:stauserextension:2.0:User:primaryObjectId"
             }
           ],
           "metadata": [
