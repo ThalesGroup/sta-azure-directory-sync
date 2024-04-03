@@ -3306,6 +3306,34 @@
               "apiExpressions": [],
               "metadata": [],
               "referencedObjects": []
+            },
+            {
+              "anchor": false,
+              "caseExact": false,
+              "defaultValue": null,
+              "flowNullValues": false,
+              "multivalued": false,
+              "mutability": "ReadWrite",
+              "name": "urn:ietf:params:scim:schemas:extension:stauserextension:2.0:User:isSecondary",
+              "required": false,
+              "type": "Boolean",
+              "apiExpressions": [],
+              "metadata": [],
+              "referencedObjects": []
+            },
+            {
+              "anchor": false,
+              "caseExact": false,
+              "defaultValue": null,
+              "flowNullValues": false,
+              "multivalued": false,
+              "mutability": "ReadWrite",
+              "name": "urn:ietf:params:scim:schemas:extension:stauserextension:2.0:User:primaryObjectId",
+              "required": false,
+              "type": "String",
+              "apiExpressions": [],
+              "metadata": [],
+              "referencedObjects": []
             }
           ],
           "metadata": [
