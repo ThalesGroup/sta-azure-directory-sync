@@ -61,10 +61,6 @@ function Connect-AzureActiveDirectory {
        
     try {
         $TestMgConnection = Get-MgContext
-    }
-    catch { }
-
-    try {
         # Connect to MGraph
         if (!$TestMgConnection) {
             Write-Host "Connecting to MgGraph..."

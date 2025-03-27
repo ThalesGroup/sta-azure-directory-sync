@@ -132,10 +132,6 @@ function Connect-MSGraph {
        
     try {
         $TestMgConnection = Get-MgContext
-    }
-    catch { }
-
-    try {
         # Connect to MSGraph
         if (!$TestMgConnection) {
             Write-Host "Connecting to MgGraph..."
