@@ -137,15 +137,24 @@ function Connect-MSGraph {
 
     try {
         # Connect to MSGraph
-        If (!$TestMgConnection) {
+        if (!$TestMgConnection) {
             Write-Host "Connecting to MgGraph..."
             $mgContext = Connect-MgGraph -Scopes "User.Read.All", "Application.ReadWrite.All"
             if (!$mgContext){
                 exit
             }
+        } else {
+            Write-Host "You are logged in as: " $TestMgConnection.Account
+            $AskForConnection = Read-Host -Prompt "Do you want to use the above account (Y/N): "
+            if ($AskForConnection.ToLower() -eq "n"){
+                Disconnect-MgGraph
+                Write-Host "Connecting to MgGraph..."
+                $mgContext = Connect-MgGraph -Scopes "User.Read.All", "Application.ReadWrite.All"
+                if (!$mgContext){
+                    exit
+                }
+            }
         }
-
-        Write-Host $result
     }
     catch {
         Write-Error "Failed to connect to MgGraph"
