@@ -60,54 +60,70 @@ function Connect-AzureActiveDirectory {
     }   
        
     try {
-        $TestAzureADConnection = Get-AzureADCurrentSessionInfo -ErrorAction SilentlyContinue
-    }
-    catch { }
-
-    try {
-        # Connect to Azure AD
-        If (!$TestAzureADConnection) {
-            Write-Host "Connecting to AzureAD..."
-            $azContext = Connect-AzureAD #Connect-AzAccount
-            if (!$azContext){
+        $TestMgConnection = Get-MgContext
+        # Connect to MGraph
+        if (!$TestMgConnection) {
+            Write-Host "Connecting to MgGraph..."
+            $mgContext = Connect-MgGraph -Scopes "User.Read.All", "Application.ReadWrite.All"
+            if (!$mgContext){
                 exit
             }
+        } else {
+            Write-Host "You are logged in as: " $TestMgConnection.Account
+            $AskForConnection = Read-Host -Prompt "Do you want to use the above account (Y/N): "
+            if ($AskForConnection.ToLower() -eq "n"){
+                Disconnect-MgGraph
+                Write-Host "Connecting to MgGraph..."
+            $mgContext = Connect-MgGraph -Scopes "User.Read.All", "Application.ReadWrite.All"
+                if (!$mgContext){
+                    exit
+                }
+            }
         }
-
-        Write-Host $result
     }
     catch {
-        Write-Error "Failed to connect to Azure AD"
+        Write-Error "Failed to connect to MgGraph"
         Write-Error $_.Exception.Message
         exit
     }
 
-    Write-Host "Connected to AzureAD"
+    Write-Host "Connected to MgGraph"
 }
 
 function Initialize-ExtensionProperties {
-    $extensionProperties = Get-AzureADExtensionProperty
+    $appRegistrationId = $script:AppRegistrationObjectId
 
-    $isSecondaryProp = $extensionProperties | ?{$_.Name -Match "_isSecondary$"}
-    if (!$isSecondaryProp -or $isSecondaryProp.TargetObjects -ne "User") {
+    # Retrieve all extension properties for a specific application
+    $extensionProperties = Get-MgApplicationExtensionProperty -ApplicationId $appRegistrationId
+
+    # Check for an extension property that matches "_isSecondary"
+    $isSecondaryProp = $extensionProperties | Where-Object { $_.Name -match "_isSecondary$" -and $_.TargetObjects -contains "User" }
+
+    # Create or utilize the "isSecondary" property
+    if (-not $isSecondaryProp) {
+        # Create a new extension property
         $isSecondaryProp = Add-ExtensionProperty "isSecondary"
+
         $script:isSecondaryPropertyName = $isSecondaryProp.Name
-        write-host $script:isSecondaryPropertyName " extension property created."
-    }
-    else {
+        Write-Host $script:isSecondaryPropertyName " extension property created."
+    } else {
         $script:isSecondaryPropertyName = $isSecondaryProp.Name
-        write-host $script:isSecondaryPropertyName " extension property found."
+        Write-Host $script:isSecondaryPropertyName " extension property found."
     }
-        
-    $primaryObjectIdProp = $extensionProperties | ?{$_.Name -Match "_primaryObjectID$"}
-    if (!$primaryObjectIdProp -or $primaryObjectIdProp.TargetObjects -ne "User") {
+
+    # Check for an extension property that matches "_primaryObjectID"
+    $primaryObjectIdProp = $extensionProperties | Where-Object { $_.Name -match "_primaryObjectId$" -and $_.TargetObjects -contains "User" }
+
+    # Create or utilize the "isSecondary" property
+    if (-not $primaryObjectIdProp) {
+        # Create a new extension property
         $primaryObjectIdProp = Add-ExtensionProperty "primaryObjectId"
+
         $script:primaryObjectIdPropertyName = $primaryObjectIdProp.Name
-        write-host $script:primaryObjectIdPropertyName  " extension property created."
-    }
-    else {
+        Write-Host $script:primaryObjectIdPropertyName " extension property created."
+    } else {
         $script:primaryObjectIdPropertyName = $primaryObjectIdProp.Name
-        write-host $script:primaryObjectIdPropertyName  " extension property found."
+        Write-Host $script:primaryObjectIdPropertyName " extension property found."
     }
 
     write-host
@@ -121,20 +137,12 @@ function Add-ExtensionProperty {
       process {
         write-host "Creating " $extensionName "..."
         #create an extension variable
-        return New-AzureADApplicationExtensionProperty -ObjectId $script:AppRegistrationObjectId -Name $extensionName -DataType "String" -TargetObjects "User"
+        return New-MgApplicationExtensionProperty -ApplicationId $appRegistrationId -BodyParameter @{"name"=$extensionName; "dataType"="String"; "targetObjects"=@("User")}
       }
 }
 
 
 Write-Host 'Thales Group - User Extension Properties Initialization'
-
-##entry point
-#if (-not ($webhookData)) {
-#    Write-Error "Webhook request received with missing RequestBody"
-#    Exit
-#}
-#
-#Grant-AccessToWebhookRequest $webhookData
 
 Connect-AzureActiveDirectory
 
